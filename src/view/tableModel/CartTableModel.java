@@ -83,10 +83,12 @@ public class CartTableModel extends AbstractTableModel{
         }
     }
 
-    // 여러 행 삭제 메서드
+    // JTable에서 클릭한 행의 번호를 가져와 삭제하는 메소드
     public void removeFoods(int[] selectedRows) {
         Arrays.sort(selectedRows);
         for (int i = selectedRows.length - 1; i >= 0; i--) {
+        	FoodVO vo = foodList.get(selectedRows[i]);
+        	vo.setCount(1);
             foodList.remove(selectedRows[i]);
             fireTableRowsDeleted(selectedRows[i], selectedRows[i]);
         }

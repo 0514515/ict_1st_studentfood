@@ -22,7 +22,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.HorizontalAlignment;
 import org.jfree.ui.TextAnchor;
 
-import model.ChartDao;
+import model.dao.ChartDao;
 import model.impl.ChartDaoImpl;
 
 

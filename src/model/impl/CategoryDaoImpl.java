@@ -6,12 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import model.CategoryDao;
 import model.ConnProperties;
+import model.dao.CategoryDao;
 import model.vo.CategoryVO;
 
 public class CategoryDaoImpl implements CategoryDao{
 	
+	//카테고리 입력(추가)
 	@Override
 	public Integer insertCategory(CategoryVO category) throws SQLException{
 		Integer result = 0;
@@ -42,6 +43,7 @@ public class CategoryDaoImpl implements CategoryDao{
 		return result;
 	}
 	
+	//카테고리 삭제
 	@Override
 	public Integer deleteCategory(String categoryName) throws SQLException {
 		Integer result = 0;

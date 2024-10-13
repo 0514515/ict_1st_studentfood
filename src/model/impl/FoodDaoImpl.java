@@ -7,11 +7,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.ConnProperties;
-import model.FoodDao;
+import model.dao.FoodDao;
 import model.vo.FoodVO;
 
 public class FoodDaoImpl implements FoodDao {
 
+	// 메뉴(음식) 추가
 	@Override
 	public Integer insertFood(FoodVO food) throws SQLException {
 		Integer result = 0;
@@ -44,6 +45,7 @@ public class FoodDaoImpl implements FoodDao {
 		return result;
 	}
 
+	//메뉴(음식) 수정
 	@Override
 	public Integer modifyFood(FoodVO before, FoodVO after) throws SQLException {
 		Integer result = 0;
@@ -79,6 +81,7 @@ public class FoodDaoImpl implements FoodDao {
 		return result;
 	}
 
+	//메뉴(음식) 삭제
 	@Override
 	public Integer deleteFood(String foodName, String categoryName) throws SQLException {
 		Integer result = 0;
@@ -109,6 +112,7 @@ public class FoodDaoImpl implements FoodDao {
 		return result;
 	}
 
+	//카테고리 1개 속 메뉴 전체 조회(JTable용)
 	@Override
 	public ArrayList selectFoodByCategory(String categoryName) throws SQLException {
 		ArrayList result = new ArrayList();
@@ -149,6 +153,7 @@ public class FoodDaoImpl implements FoodDao {
 		return result;
 	}
 
+	//카테고리 1개 속 전체 메뉴 조회 (JButton용)
 	@Override
 	public ArrayList<FoodVO> selectFoodVOByCategory(String categoryName) throws SQLException {
 		ArrayList<FoodVO> result = new ArrayList<>();

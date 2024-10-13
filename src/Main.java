@@ -7,22 +7,28 @@ import javax.swing.JTabbedPane;
 import view.ChartView;
 import view.FoodManagementView;
 import view.KioskView;
+import view.StudentView;
 
 public class Main extends JFrame{
 	JTabbedPane pane;
 	public Main() {
 		pane = new JTabbedPane();	//상단 탭을 위한 TabbedPane
 		
+		//FoodManagement에서 카테고리, 음식 변화 발생 시 refresh를 위한 래퍼런스
+		KioskView kioskView = new KioskView();
+		
 		//탭 추가
-		pane.addTab("음식 kiosk",new KioskView());
-		pane.addTab("음식 관리",new FoodManagementView());
+		pane.addTab("학생 관리",new StudentView());
+		pane.addTab("음식 kiosk",kioskView);
+		pane.addTab("음식/카테고리 관리",new FoodManagementView(kioskView));
 		pane.addTab("주문 통계", new ChartView());
 		
 		
 		//탭에 컴포넌트 주입
-		setTabLabel(0, "음식 kiosk");
-		setTabLabel(1, "음식/카테고리 관리");
-		setTabLabel(2, "주문 통계");
+		setTabLabel(0, "학생 관리");
+		setTabLabel(1, "음식 kiosk");
+		setTabLabel(2, "음식/카테고리 관리");
+		setTabLabel(3, "주문 통계");
 		
 		add(pane);
 		

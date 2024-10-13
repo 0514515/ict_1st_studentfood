@@ -19,9 +19,9 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-import model.CategoryDao;
-import model.FoodDao;
-import model.OrderDao;
+import model.dao.CategoryDao;
+import model.dao.FoodDao;
+import model.dao.OrderDao;
 import model.impl.CategoryDaoImpl;
 import model.impl.FoodDaoImpl;
 import model.impl.OrderDaoImpl;
@@ -139,6 +139,8 @@ public class KioskView extends JPanel {
 	}
 
 	void generateCategoryAndFood() {
+		scrollPanel.removeAll();
+		
 		ArrayList result = new ArrayList();
 		try {
 			result = categoryDao.selectAllCategory();
@@ -161,6 +163,9 @@ public class KioskView extends JPanel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		scrollPanel.revalidate();
+		scrollPanel.repaint();
 	}
 
 	void generateFood(String categoryName) {
