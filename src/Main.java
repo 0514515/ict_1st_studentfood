@@ -24,7 +24,7 @@ public class Main extends JFrame{
 		pane.addTab("주문 통계", new ChartView());
 		
 		
-		//탭에 컴포넌트 주입
+		//탭 사이즈와 타이틀 세팅
 		setTabLabel(0, "학생 관리");
 		setTabLabel(1, "음식 kiosk");
 		setTabLabel(2, "음식/카테고리 관리");
@@ -38,6 +38,7 @@ public class Main extends JFrame{
 		setResizable(false);
 	}
 	
+	// 탭의 사이즈와 타이틀을 설정하는 메소드
 	private void setTabLabel(int idx, String title) {
 		JLabel lab = new JLabel(title);
 		lab.setHorizontalAlignment(JLabel.CENTER);

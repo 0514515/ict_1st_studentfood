@@ -26,8 +26,8 @@ import model.impl.CategoryDaoImpl;
 import model.impl.FoodDaoImpl;
 import model.vo.CategoryVO;
 import model.vo.FoodVO;
-import view.tableModel.CategoryTableModel;
-import view.tableModel.FoodTableModel;
+import view.tablemodel.CategoryTableModel;
+import view.tablemodel.FoodTableModel;
 
 public class FoodManagementView extends JPanel {
 
@@ -93,7 +93,7 @@ public class FoodManagementView extends JPanel {
 
 		// 사이즈 조절
 		panel1.setAlignmentX(Component.CENTER_ALIGNMENT);
-		categoryTf.setMaximumSize(new Dimension(200,30));
+		categoryTf.setPreferredSize(new Dimension(300,30));
 
 		// 레이아웃 세팅
 		panel1.setLayout(new BoxLayout(panel1, BoxLayout.Y_AXIS));
@@ -106,12 +106,18 @@ public class FoodManagementView extends JPanel {
 
 		// 컴포넌트 배치
 		panel1.add(Box.createVerticalStrut(350));
-		panel1.add(categoryTf);
-		panel1.add(Box.createRigidArea(new Dimension(0, 5)));
-		panel1.add(categoryResistBtn);
-		panel1.add(Box.createRigidArea(new Dimension(0, 5)));
-		panel1.add(categoryDeleteBtn);
-		panel1.add(Box.createRigidArea(new Dimension(0, 10)));
+		JPanel temp = new JPanel();
+		temp.add(new JLabel("카테고리명"));
+		temp.add(Box.createRigidArea(new Dimension(10,0)));
+		temp.add(categoryTf);
+		temp.setMaximumSize(new Dimension(400,45));
+		panel1.add(temp);
+		temp = new JPanel();
+		temp.add(categoryResistBtn);
+		temp.add(categoryDeleteBtn);
+		temp.add(Box.createRigidArea(new Dimension(10,0)));
+		panel1.add(temp);
+		temp.setMaximumSize(new Dimension(400,45));
 		panel1.add(categoryAlertLabel);
 		
 
@@ -178,12 +184,42 @@ public class FoodManagementView extends JPanel {
 		foodAlertLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 		// 컴포넌트 배치
-		panel4.add(Box.createVerticalStrut(350));
-		panel4.add(foodNameTf);
-		panel4.add(Box.createRigidArea(new Dimension(0, 5))); // 각 Tf사이의 패딩용으로 비어있는 블럭 추가
-		panel4.add(foodPriceTf);
-		panel4.add(Box.createRigidArea(new Dimension(0, 5)));
-		panel4.add(foodStatusTf);
+		
+		panel4.add(Box.createVerticalStrut(150));
+		JLabel status = new JLabel("판매상태");
+		status.setAlignmentX(Component.CENTER_ALIGNMENT);
+		panel4.add(status);
+		status = new JLabel("1: 판매중");
+		status.setAlignmentX(Component.CENTER_ALIGNMENT);
+		panel4.add(status);
+		status = new JLabel("0: 판매중지");
+		status.setAlignmentX(Component.CENTER_ALIGNMENT);
+		panel4.add(status);
+		panel4.add(Box.createVerticalStrut(100));
+		JPanel temp = new JPanel();
+		temp.add(new JLabel("음식 이름"));
+		temp.add(Box.createRigidArea(new Dimension(10,0)));
+		temp.add(foodNameTf);
+		foodNameTf.setPreferredSize(new Dimension(200,30));
+		temp.setMaximumSize(new Dimension(400,45));
+		panel4.add(temp);
+		
+		temp = new JPanel();
+		temp.add(new JLabel("가격"));
+		temp.add(Box.createRigidArea(new Dimension(10,0)));
+		temp.add(foodPriceTf);
+		foodPriceTf.setPreferredSize(new Dimension(200,30));
+		temp.setMaximumSize(new Dimension(400,45));
+		panel4.add(temp);
+		
+		temp = new JPanel();
+		temp.add(new JLabel("판매 상태"));
+		temp.add(Box.createRigidArea(new Dimension(10,0)));
+		temp.add(foodStatusTf);
+		foodStatusTf.setPreferredSize(new Dimension(200,30));
+		temp.setMaximumSize(new Dimension(400,45));
+		panel4.add(temp);
+		
 		panel4.add(Box.createRigidArea(new Dimension(0, 5)));
 		panel4.add(foodResistBtn);
 		panel4.add(Box.createRigidArea(new Dimension(0, 5)));
@@ -225,7 +261,7 @@ public class FoodManagementView extends JPanel {
 			int result = categoryDao.insertCategory(category);
 
 			// 카테고리 추가 시 KioskView의 카테고리, 음식 업데이트
-			kioskView.generateCategoryAndFood();
+			kioskView.generateCategory();
 
 			categoryAlertLabel.setText("등록 : 카테고리 생성 성공");
 		} catch (Exception e) {
@@ -250,7 +286,7 @@ public class FoodManagementView extends JPanel {
 			int result = categoryDao.deleteCategory(categoryName);
 
 			// 카테고리 삭제 시 KioskView의 카테고리, 음식 업데이트
-			kioskView.generateCategoryAndFood();
+			kioskView.generateCategory();
 
 			categoryAlertLabel.setText("삭제 : 카테고리 삭제 성공");
 
@@ -331,11 +367,6 @@ public class FoodManagementView extends JPanel {
 			return;
 		}
 		
-		if(foodTable.getSelectedRow()==-1) {
-			foodAlertLabel.setText("수정 : 음식을 선택해주세요");
-			return;
-		}
-		
 		// 음식 생성 : TextField로부터 음식의 정보를 가져온다.
 		FoodVO food = new FoodVO();
 		food.setFoodName(foodNameTf.getText()); // 음식 이름
@@ -367,7 +398,7 @@ public class FoodManagementView extends JPanel {
 		}
 		
 		if(foodTable.getSelectedRow()==-1) {
-			foodAlertLabel.setText("수정 : 음식을 선택해주세요");
+			foodAlertLabel.setText("삭제 : 음식을 선택해주세요");
 			return;
 		}
 		

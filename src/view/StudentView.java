@@ -23,7 +23,7 @@ import javax.swing.border.TitledBorder;
 import model.dao.StudentDao;
 import model.impl.StudentDaoImpl;
 import model.vo.StudentVO;
-import view.tableModel.StudentTableModel;
+import view.tablemodel.StudentTableModel;
 
 public class StudentView extends JPanel {
 
